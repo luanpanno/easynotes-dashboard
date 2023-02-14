@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { env } from '../config/env';
+import { env } from '@config/env';
 
 export const TOKEN_KEY = 'auth';
 

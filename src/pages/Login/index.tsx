@@ -1,12 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../contexts/AuthContext';
-import { authService } from '../../services/auth';
-import {
-  notificationSuccess,
-  notificationError,
-} from '../../utils/notifications';
+import { useAuth } from '@contexts/AuthContext';
+
+import { authService } from '@services/auth';
+
+import { notificationSuccess, notificationError } from '@utils/notifications';
 
 import { Form, LoginContainer } from './styles';
 

@@ -1,7 +1,8 @@
 import JwtDecode from 'jwt-decode';
 
-import { User } from '../models/auth/user';
-import { notificationError } from '../utils/notifications';
+import { User } from '@models/auth/user';
+
+import { notificationError } from '@utils/notifications';
 
 import api, { TOKEN_KEY } from './api';
 

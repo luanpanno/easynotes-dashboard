@@ -1,9 +1,10 @@
 import { Routes as Switch, Route, Navigate } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
 
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
-import PrivateRoute from './PrivateRoute';
+import Dashboard from '@pages/Dashboard';
+import Login from '@pages/Login';
+import Signup from '@pages/Signup';
+
+import PrivateRoute from '../PrivateRoute';
 
 const Routes = () => (
   <Switch>

@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { User } from '../models/auth/user';
-import { authService } from '../services/auth';
+
+import { User } from '@models/auth/user';
+
+import { authService } from '@services/auth';
 
 type Props = {
   children?: React.ReactNode;
