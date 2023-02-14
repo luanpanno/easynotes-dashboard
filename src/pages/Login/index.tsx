@@ -1,17 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useAuth } from '@contexts/AuthContext';
-
-import { authService } from '@services/auth';
-
-import { notificationSuccess, notificationError } from '@utils/notifications';
 
 import { Form, LoginContainer } from './styles';
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { handleUser } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,20 +16,10 @@ const Login = () => {
   const handlePasswordChange = (ev: ChangeEvent<HTMLInputElement>) =>
     setPassword(ev.target.value);
 
-  const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    try {
-      const user = await authService.login({ email, password });
-
-      notificationSuccess('Usuário autenticado com sucesso');
-
-      handleUser(user);
-
-      navigate('/dashboard');
-    } catch (error: any) {
-      notificationError(error.message);
-    }
+    login({ email, password });
   };
 
   return (

@@ -1,32 +1,16 @@
 import JwtDecode from 'jwt-decode';
 
-import { User } from '@models/auth/user';
+import {
+  DecodedToken,
+  LoginFields,
+  LoginResponse,
+  SignupFields,
+  User,
+} from '@models/auth/user';
 
 import { notificationError } from '@utils/notifications';
 
 import api, { TOKEN_KEY } from './api';
-
-type LoginFields = {
-  email: string;
-  password: string;
-};
-
-type SignupFields = {
-  name: string;
-  email: string;
-  password: string;
-  birthdate: string;
-};
-
-type LoginResponse = User & {
-  token: string;
-};
-
-type DecodedToken = {
-  user: User;
-  iat: number;
-  exp: number;
-};
 
 class AuthService {
   login = async (values: LoginFields): Promise<User> => {

@@ -1,18 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-
 import { useAuth } from '@contexts/AuthContext';
 
-import { authService } from '@services/auth';
-
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const { user, handleUser } = useAuth();
-
-  const handleLogout = () => {
-    authService.logout();
-    handleUser(null as any);
-    navigate('/');
-  };
+  const { user, logout } = useAuth();
 
   return (
     <div>
@@ -21,7 +10,7 @@ const Dashboard = () => {
       <button
         type='button'
         style={{ height: '50px', width: '100px' }}
-        onClick={handleLogout}
+        onClick={logout}
       >
         Sair
       </button>
