@@ -10,7 +10,7 @@ type Props = {
 
 type Context = {
   user: User;
-  saveUser: (user: User) => void;
+  handleUser: (user: User) => void;
 };
 
 export const AuthContext = createContext<Context>(null as any);
@@ -26,10 +26,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     }
   }, [user]);
 
-  const saveUser = (user: User) => setUser(user);
+  const handleUser = (user: User) => setUser(user);
 
   return (
-    <AuthContext.Provider value={{ user, saveUser }}>
+    <AuthContext.Provider value={{ user, handleUser }}>
       {children}
     </AuthContext.Provider>
   );

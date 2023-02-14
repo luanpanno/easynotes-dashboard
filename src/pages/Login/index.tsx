@@ -11,7 +11,7 @@ import { Form, LoginContainer } from './styles';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { saveUser } = useAuth();
+  const { handleUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,7 +29,7 @@ const Login = () => {
 
       notificationSuccess('Usuário autenticado com sucesso');
 
-      saveUser(user);
+      handleUser(user);
 
       navigate('/dashboard');
     } catch (error: any) {

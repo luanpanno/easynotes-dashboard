@@ -6,10 +6,11 @@ import { authService } from '@services/auth';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, handleUser } = useAuth();
 
   const handleLogout = () => {
     authService.logout();
+    handleUser(null as any);
     navigate('/');
   };
 
