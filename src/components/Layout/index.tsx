@@ -2,8 +2,9 @@ import { Outlet } from 'react-router-dom';
 
 import DefaultPfp from '@assets/imgs/default-user-image.png';
 
-import { LayoutContainer } from './styles';
 import { useAuth } from '@contexts/AuthContext';
+
+import { LayoutContainer } from './styles';
 
 const Layout = () => {
   const { logout } = useAuth();
@@ -14,9 +15,12 @@ const Layout = () => {
         <div>
           <span>Easynotes</span>
         </div>
-        <div className='user'>
+        <div className="user">
           <img src={DefaultPfp} />
-          <button type='button' onClick={logout}>
+          <button
+            type="button"
+            onClick={logout}
+          >
             Sair
           </button>
         </div>

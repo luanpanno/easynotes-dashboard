@@ -3,7 +3,10 @@ import MoonLoader from 'react-spinners/MoonLoader';
 
 const Loading = {
   Global: ({ loading }: { loading: boolean }) => (
-    <BarLoader loading={loading} width='100vw' />
+    <BarLoader
+      loading={loading}
+      width="100vw"
+    />
   ),
   Spinner: ({ loading }: { loading: boolean }) => (
     <MoonLoader loading={loading} />

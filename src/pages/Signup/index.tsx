@@ -45,31 +45,31 @@ const Signup = () => {
     <LoginContainer>
       <Form onSubmit={handleSubmit}>
         <input
-          type='text'
-          placeholder='Name'
+          type="text"
+          placeholder="Name"
           value={name}
           onChange={handleNameChange}
         />
         <input
-          type='text'
-          placeholder='Email'
+          type="text"
+          placeholder="Email"
           value={email}
           onChange={handleEmailChange}
         />
         <input
-          type='date'
-          placeholder='Date'
+          type="date"
+          placeholder="Date"
           value={birthdate}
           onChange={handleBirthdateChange}
         />
         <input
-          type='password'
-          placeholder='Senha'
+          type="password"
+          placeholder="Senha"
           value={password}
           onChange={handlePasswordChange}
         />
-        <Link to='/login'>Voltar</Link>
-        <button type='submit'>Cadastrar</button>
+        <Link to="/login">Voltar</Link>
+        <button type="submit">Cadastrar</button>
       </Form>
     </LoginContainer>
   );

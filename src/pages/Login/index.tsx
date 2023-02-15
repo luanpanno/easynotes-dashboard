@@ -26,22 +26,22 @@ const Login = () => {
     <LoginContainer>
       <Form onSubmit={handleSubmit}>
         <input
-          type='text'
-          placeholder='Email'
+          type="text"
+          placeholder="Email"
           value={email}
           onChange={handleEmailChange}
         />
         <input
-          type='password'
-          placeholder='Senha'
+          type="password"
+          placeholder="Senha"
           value={password}
           onChange={handlePasswordChange}
         />
         <span>
-          Esqueceu sua senha? <Link to='/'>Recupere aqui</Link>
+          Esqueceu sua senha? <Link to="/">Recupere aqui</Link>
         </span>
-        <Link to='/signup'>Cadastrar</Link>
-        <button type='submit'>Entrar</button>
+        <Link to="/signup">Cadastrar</Link>
+        <button type="submit">Entrar</button>
       </Form>
     </LoginContainer>
   );

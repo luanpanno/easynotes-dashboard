@@ -34,7 +34,7 @@ api.interceptors.response.use(
     redirectToAuth(error);
 
     return Promise.reject(new Error(message));
-  },
+  }
 );
 
 function redirectToAuth(error: any) {

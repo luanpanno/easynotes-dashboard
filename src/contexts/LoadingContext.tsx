@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-import api from '@services/api';
 import Loading from '@components/Loading';
+
+import api from '@services/api';
 
 type Props = {
   children?: React.ReactNode;
@@ -28,7 +29,7 @@ export const LoadingProvider: React.FC<Props> = ({ children }) => {
         setLoading(false);
 
         return Promise.reject(error);
-      },
+      }
     );
 
     api.interceptors.response.use(
@@ -43,7 +44,7 @@ export const LoadingProvider: React.FC<Props> = ({ children }) => {
         setLoading(false);
 
         return Promise.reject(error);
-      },
+      }
     );
   }, []);
 
