@@ -4,20 +4,29 @@ import Dashboard from '@pages/Dashboard';
 import Login from '@pages/Login';
 import Signup from '@pages/Signup';
 
-import PrivateRoute from '../PrivateRoute';
 import PublicRoute from '@routes/PublicRoute';
+import Layout from '@components/Layout';
+import AuthLayout from '@components/AuthLayout';
+
+import PrivateRoute from '../PrivateRoute';
 
 const Routes = () => (
   <Switch>
-    <Route path='/login' element={<PublicRoute />}>
-      <Route path='/login' element={<Login />} />
+    <Route element={<AuthLayout />}>
+      <Route path='/login' element={<PublicRoute />}>
+        <Route path='/login' element={<Login />} />
+      </Route>
     </Route>
-    <Route path='/signup' element={<PublicRoute />}>
-      <Route path='/signup' element={<Signup />} />
+    <Route element={<AuthLayout />}>
+      <Route path='/signup' element={<PublicRoute />}>
+        <Route path='/signup' element={<Signup />} />
+      </Route>
     </Route>
 
-    <Route path='/dashboard' element={<PrivateRoute />}>
-      <Route path='/dashboard' element={<Dashboard />} />
+    <Route element={<Layout />}>
+      <Route path='/dashboard' element={<PrivateRoute />}>
+        <Route path='/dashboard' element={<Dashboard />} />
+      </Route>
     </Route>
     <Route path='*' element={<Navigate to='/login' replace />} />
   </Switch>
