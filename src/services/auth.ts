@@ -6,7 +6,7 @@ import {
   LoginResponse,
   SignupFields,
   User,
-} from '@models/auth/user';
+} from '@models/user';
 
 import { notificationError } from '@utils/notifications';
 

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LoginFields, User } from '@models/auth/user';
+import { LoginFields, User } from '@models/user';
 
 import { authService } from '@services/auth';
 
