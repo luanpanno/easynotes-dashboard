@@ -10,7 +10,7 @@ export const LayoutContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding: 0 50px;
+    padding: 0 150px;
 
     span {
       font-size: 1.2rem;
@@ -26,5 +26,9 @@ export const LayoutContainer = styled.div`
       align-items: center;
       column-gap: 16px;
     }
+  }
+
+  & > main {
+    padding: 0 150px;
   }
 `;
