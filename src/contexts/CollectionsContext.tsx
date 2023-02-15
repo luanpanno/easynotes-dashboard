@@ -12,20 +12,40 @@ type Props = {
 
 type Context = {
   collections: Collection[];
+  selectedCollection: Collection | undefined;
   getCollections: () => Promise<Collection[]>;
+  getCollectionById: (id: number) => Promise<Collection>;
   createCollection: (values: CreateCollection) => Promise<Collection>;
+  setSelectedCollection: React.Dispatch<
+    React.SetStateAction<Collection | undefined>
+  >;
 };
 
 export const CollectionsContext = createContext<Context>(null as any);
 
 export const CollectionsProvider: React.FC<Props> = ({ children }) => {
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [selectedCollection, setSelectedCollection] = useState<Collection>();
 
   const getCollections = async () => {
     try {
       const { data } = await collectionsService.list();
 
       setCollections(data);
+
+      return data;
+    } catch (error: any) {
+      notificationError(error.message);
+
+      return Promise.reject();
+    }
+  };
+
+  const getCollectionById = async (id: number) => {
+    try {
+      const { data } = await collectionsService.getById(id);
+
+      setSelectedCollection(data);
 
       return data;
     } catch (error: any) {
@@ -53,7 +73,14 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <CollectionsContext.Provider
-      value={{ collections, getCollections, createCollection }}
+      value={{
+        collections,
+        getCollections,
+        getCollectionById,
+        createCollection,
+        selectedCollection,
+        setSelectedCollection,
+      }}
     >
       {children}
     </CollectionsContext.Provider>

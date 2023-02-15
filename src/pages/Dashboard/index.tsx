@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import CollectionList from '@components/collections/CollectionList';
 import CollectionFormModal from '@components/modals/CollectionFormModal';
 
-import { useAuth } from '@contexts/AuthContext';
 import { useCollections } from '@contexts/CollectionsContext';
 
 const Dashboard = () => {
-  const { user } = useAuth();
-  const { collections, getCollections } = useCollections();
+  const { getCollections } = useCollections();
   const [openCreateCollection, setOpenCreateCollection] = useState(false);
 
   useEffect(() => {
@@ -25,25 +24,15 @@ const Dashboard = () => {
   return (
     <div>
       <div>
-        <div>
-          <h1>Dashboard</h1>
-          <div>
-            <button
-              type="button"
-              onClick={handleOpenCreateCollection}
-            >
-              Criar coleção
-            </button>
-          </div>
-        </div>
-        <p>Olá, {user?.name ?? 'null'}</p>
+        <h1>Dashboard</h1>
+        <button
+          type="button"
+          onClick={handleOpenCreateCollection}
+        >
+          Criar coleção
+        </button>
       </div>
-      <div>
-        {collections.map((collection) => (
-          <span key={collection.id}>{collection.name}</span>
-        ))}
-        {collections.length === 0 && <span>Nenhuma coleção</span>}
-      </div>
+      <CollectionList />
       <CollectionFormModal
         name="Criar coleção"
         show={openCreateCollection}

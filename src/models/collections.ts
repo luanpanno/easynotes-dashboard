@@ -1,3 +1,5 @@
+export type CollectionId = number;
+
 export type Collection = {
   id: number;
   name: string;

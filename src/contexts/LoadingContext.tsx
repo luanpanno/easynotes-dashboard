@@ -34,9 +34,7 @@ export const LoadingProvider: React.FC<Props> = ({ children }) => {
 
     api.interceptors.response.use(
       (res) => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 200);
+        setLoading(false);
 
         return res;
       },

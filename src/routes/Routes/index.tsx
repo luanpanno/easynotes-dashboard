@@ -3,6 +3,7 @@ import { Routes as Switch, Route, Navigate } from 'react-router-dom';
 import AuthLayout from '@components/AuthLayout';
 import Layout from '@components/Layout';
 
+import Collection from '@pages/Collection';
 import Dashboard from '@pages/Dashboard';
 import Login from '@pages/Login';
 import Signup from '@pages/Signup';
@@ -44,6 +45,18 @@ const Routes = () => (
         <Route
           path="/dashboard"
           element={<Dashboard />}
+        />
+      </Route>
+    </Route>
+
+    <Route element={<Layout />}>
+      <Route
+        path="/dashboard/:id"
+        element={<PrivateRoute />}
+      >
+        <Route
+          path="/dashboard/:id"
+          element={<Collection />}
         />
       </Route>
     </Route>

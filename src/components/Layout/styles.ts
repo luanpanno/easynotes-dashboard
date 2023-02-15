@@ -11,8 +11,9 @@ export const LayoutContainer = styled.div`
     align-items: center;
     height: 80px;
     padding: 0 150px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
-    span {
+    a {
       font-size: 1.2rem;
     }
 
@@ -25,6 +26,13 @@ export const LayoutContainer = styled.div`
       display: flex;
       align-items: center;
       column-gap: 16px;
+
+      & > div {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+        margin-right: 16px;
+      }
     }
   }
 

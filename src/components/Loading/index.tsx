@@ -5,7 +5,13 @@ const Loading = {
   Global: ({ loading }: { loading: boolean }) => (
     <BarLoader
       loading={loading}
-      width="100vw"
+      cssOverride={{
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        height: '5px',
+        width: '100vw',
+      }}
     />
   ),
   Spinner: ({ loading }: { loading: boolean }) => (
