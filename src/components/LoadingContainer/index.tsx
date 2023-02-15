@@ -1,14 +1,17 @@
+import { PropsWithChildren } from 'react';
+
 import Loading from '@components/Loading';
-
-import { useLoading } from '@contexts/LoadingContext';
-
-import { ChildrenProp } from '@models/index';
 
 import { LoadingConditionalContainer } from './styles';
 
-const LoadingContainer: React.FC<ChildrenProp> = ({ children }) => {
-  const { loading } = useLoading();
+type LoadingContainerProps = {
+  loading: boolean;
+};
 
+const LoadingContainer: React.FC<PropsWithChildren<LoadingContainerProps>> = ({
+  loading,
+  children,
+}) => {
   if (loading)
     return (
       <LoadingConditionalContainer>

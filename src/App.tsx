@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from '@contexts/AuthContext';
 import { CollectionsProvider } from '@contexts/CollectionsContext';
 import { LoadingProvider } from '@contexts/LoadingContext';
+import { NotesProvider } from '@contexts/NotesCollection';
 
 import Routes from '@routes/Routes';
 
@@ -17,7 +18,9 @@ function App() {
       <LoadingProvider>
         <AuthProvider>
           <CollectionsProvider>
-            <Routes />
+            <NotesProvider>
+              <Routes />
+            </NotesProvider>
           </CollectionsProvider>
         </AuthProvider>
       </LoadingProvider>

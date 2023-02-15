@@ -1,1 +1,1 @@
-export const getParamId = (id: string) => parseInt(id, 10);
+export const getParamId = (id?: string) => (id ? parseInt(id, 10) : null);

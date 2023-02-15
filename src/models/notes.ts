@@ -1,11 +1,12 @@
 export type Note = {
   id: number;
   name: string;
-  email: string;
-  token: string;
-  birthdate: string;
+  userId: number;
   createdAt: string;
   updatedAt: string;
+  content?: string;
+  labelId?: number;
+  collectionId?: number;
 };
 
 export type CreateNote = {

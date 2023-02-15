@@ -2,18 +2,18 @@ import { FormEvent, useState } from 'react';
 
 import { ModalProps } from '@components/modals/Modal';
 
-import { useCollections } from '@contexts/CollectionsContext';
+import { useNotes } from '@contexts/NotesCollection';
 
-export type CollectionFormProps = ModalProps;
+export type NoteFormProps = ModalProps;
 
-const CollectionForm: React.FC<CollectionFormProps> = ({ closeModal }) => {
-  const { createCollection } = useCollections();
+const NoteForm: React.FC<NoteFormProps> = ({ closeModal }) => {
+  const { createNote } = useNotes();
   const [name, setName] = useState('');
 
   const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    createCollection({ name });
+    createNote({ name });
 
     closeModal();
   };
@@ -22,7 +22,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ closeModal }) => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Nome da coleção"
+        placeholder="Nome da nota"
         value={name}
         onChange={(ev) => setName(ev.target.value)}
       />
@@ -39,4 +39,4 @@ const CollectionForm: React.FC<CollectionFormProps> = ({ closeModal }) => {
   );
 };
 
-export default CollectionForm;
+export default NoteForm;
