@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { AuthProvider } from '@contexts/AuthContext';
+import { CollectionsProvider } from '@contexts/CollectionsContext';
 import { LoadingProvider } from '@contexts/LoadingContext';
 
 import Routes from '@routes/Routes';
@@ -15,7 +16,9 @@ function App() {
       <ToastContainer />
       <LoadingProvider>
         <AuthProvider>
-          <Routes />
+          <CollectionsProvider>
+            <Routes />
+          </CollectionsProvider>
         </AuthProvider>
       </LoadingProvider>
     </BrowserRouter>

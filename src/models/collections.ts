@@ -1,11 +1,10 @@
 export type Collection = {
   id: number;
   name: string;
-  email: string;
-  token: string;
-  birthdate: string;
   createdAt: string;
   updatedAt: string;
+  userId: number;
+  labelId?: number;
 };
 
 export type CreateCollection = {

@@ -27,12 +27,11 @@
     "indent": ["error", 2],
     "semi": [2, "always"],
     "@typescript-eslint/semi": [2, "always"],
-    // "jsx-quotes": "error",
     "prettier/prettier": ["warn", { "endOfLine": "auto" }],
     "arrow-body-style": ["error"],
-    "no-magic-numbers": "warn",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "import-helpers/order-imports": [
       "error",
       {

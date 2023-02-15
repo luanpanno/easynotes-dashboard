@@ -48,7 +48,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     } catch (error: any) {
       notificationError(error.message);
 
-      return null as any;
+      return Promise.reject();
     }
   };
 
