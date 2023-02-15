@@ -38,7 +38,7 @@ const Collection = () => {
   return (
     <LoadingContainer loading={loading && !selectedCollection}>
       <div>
-        <div>
+        <header className="page-title">
           <h1>{collection?.name}</h1>
           <button
             type="button"
@@ -46,7 +46,7 @@ const Collection = () => {
           >
             Criar nota
           </button>
-        </div>
+        </header>
         <NotesList />
       </div>
       <NoteFormModal

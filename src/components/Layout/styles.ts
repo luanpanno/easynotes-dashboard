@@ -38,5 +38,11 @@ export const LayoutContainer = styled.div`
 
   & > main {
     padding: 0 150px;
+
+    .page-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 `;

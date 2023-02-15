@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div>
+      <header className="page-title">
         <h1>Dashboard</h1>
         <button
           type="button"
@@ -31,7 +31,7 @@ const Dashboard = () => {
         >
           Criar coleção
         </button>
-      </div>
+      </header>
       <CollectionList />
       <CollectionFormModal
         name="Criar coleção"
