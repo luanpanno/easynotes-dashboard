@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getCollections();
-  }, []);
+  }, [getCollections]);
 
   const handleOpenCreateCollection = () => {
     setOpenCreateCollection(true);

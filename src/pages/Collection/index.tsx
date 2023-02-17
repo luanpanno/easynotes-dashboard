@@ -31,13 +31,13 @@ const Collection = () => {
     if (collection || !collectionId) return;
 
     getCollectionById(collectionId);
-  }, []);
+  }, [collection, collectionId, getCollectionById]);
 
   useEffect(() => {
     if (!selectedCollection) return;
 
     getNotes();
-  }, []);
+  }, [getNotes, selectedCollection]);
 
   if (!collectionId) return null;
 
