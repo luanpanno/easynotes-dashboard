@@ -5,7 +5,7 @@ import { LoginFields, User } from '@models/user';
 
 import { authService } from '@services/auth';
 
-import { notificationError, notificationSuccess } from '@utils/notifications';
+import { notificationError } from '@utils/notifications';
 
 type Props = {
   children?: React.ReactNode;
@@ -37,8 +37,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const login = async (values: LoginFields) => {
     try {
       const user = await authService.login(values);
-
-      notificationSuccess('Usuário autenticado com sucesso');
 
       handleUser(user);
 
