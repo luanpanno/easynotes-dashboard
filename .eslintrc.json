@@ -16,13 +16,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "import-helpers",
-    "eslint-plugin-import-helpers",
-    "prettier"
-  ],
+  "plugins": ["react", "@typescript-eslint", "import-helpers", "prettier"],
   "rules": {
     "semi": [2, "always"],
     "@typescript-eslint/semi": [2, "always"],

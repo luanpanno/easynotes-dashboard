@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import LoadingContainer from '@components/LoadingContainer';
-import NoteFormModal from '@components/modals/NoteFormModal';
 import NoteArea from '@components/notes/NoteArea';
 import NotesList from '@components/notes/NotesList';
 
@@ -21,7 +20,6 @@ const Collection = () => {
   const { loading } = useLoading();
   const { selectedCollection, getCollectionById } = useCollections();
   const { getNotes } = useNotes();
-  const [openCreateNote, setOpenCreateNote] = useState(false);
   const [selectedNote, setSelectedNote] = useState<Note>(null as any);
   const collectionId = getParamId(id);
   const collection =
@@ -49,12 +47,6 @@ const Collection = () => {
         <div>
           <header className="page-title">
             <h1>{collection?.name}</h1>
-            <button
-              type="button"
-              onClick={() => setOpenCreateNote(true)}
-            >
-              Criar nota
-            </button>
           </header>
           <div className="notes-container">
             <NotesList
@@ -65,11 +57,6 @@ const Collection = () => {
           </div>
         </div>
       </CollectionContainer>
-      <NoteFormModal
-        show={openCreateNote}
-        closeModal={() => setOpenCreateNote(false)}
-        name="Criar nota"
-      />
     </LoadingContainer>
   );
 };
