@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import LoadingContainer from '@components/LoadingContainer';
 import NoteFormModal from '@components/modals/NoteFormModal';
+import Note from '@components/notes/Note';
 import NotesList from '@components/notes/NotesList';
 
 import { useCollections } from '@contexts/CollectionsContext';
@@ -10,6 +11,8 @@ import { useLoading } from '@contexts/LoadingContext';
 import { useNotes } from '@contexts/NotesCollection';
 
 import { getParamId } from '@utils/getParamId';
+
+import { CollectionContainer } from './styles';
 
 const Collection = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,20 +38,27 @@ const Collection = () => {
     getNotes();
   }, []);
 
+  if (!collectionId) return null;
+
   return (
     <LoadingContainer loading={loading && !selectedCollection}>
-      <div>
-        <header className="page-title">
-          <h1>{collection?.name}</h1>
-          <button
-            type="button"
-            onClick={() => setOpenCreateNote(true)}
-          >
-            Criar nota
-          </button>
-        </header>
-        <NotesList />
-      </div>
+      <CollectionContainer>
+        <div>
+          <header className="page-title">
+            <h1>{collection?.name}</h1>
+            <button
+              type="button"
+              onClick={() => setOpenCreateNote(true)}
+            >
+              Criar nota
+            </button>
+          </header>
+          <div className="notes-container">
+            <NotesList collectionId={collectionId} />
+            <Note />
+          </div>
+        </div>
+      </CollectionContainer>
       <NoteFormModal
         show={openCreateNote}
         closeModal={() => setOpenCreateNote(false)}

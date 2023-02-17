@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from 'react';
 
-import { CreateNote, Note } from '@models/notes';
+import { CreateNote, Note, UpdateNote } from '@models/notes';
 
 import { notesService } from '@services/notes';
 
-import { notificationError, notificationSuccess } from '@utils/notifications';
+import { notificationError } from '@utils/notifications';
 
 type Props = {
   children?: React.ReactNode;
@@ -16,6 +16,8 @@ type Context = {
   getNotes: () => Promise<Note[]>;
   getNoteById: (id: number) => Promise<Note>;
   createNote: (values: CreateNote) => Promise<Note>;
+  editNote: (id: UpdateNote) => Promise<Note>;
+  deleteNote: (id: number) => Promise<void>;
   setSelectedNote: React.Dispatch<React.SetStateAction<Note | undefined>>;
 };
 
@@ -59,9 +61,37 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
 
       setNotes((prevState) => [...prevState, data]);
 
-      notificationSuccess('Coleção criada com sucesso');
+      return data;
+    } catch (error: any) {
+      notificationError(error.message);
+
+      return Promise.reject();
+    }
+  };
+
+  const editNote = async (values: UpdateNote) => {
+    try {
+      const { data } = await notesService.update(values);
+
+      setNotes((prevState) =>
+        prevState.map((note) => (note.id === data.id ? data : note))
+      );
 
       return data;
+    } catch (error: any) {
+      notificationError(error.message);
+
+      return Promise.reject();
+    }
+  };
+
+  const deleteNote = async (id: number) => {
+    try {
+      await notesService.delete(id);
+
+      setNotes((prevState) => prevState.filter((note) => note.id !== id));
+
+      return Promise.resolve();
     } catch (error: any) {
       notificationError(error.message);
 
@@ -78,6 +108,8 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
         createNote,
         selectedNote,
         setSelectedNote,
+        editNote,
+        deleteNote,
       }}
     >
       {children}
