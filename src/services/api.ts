@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reject } from 'ramda';
 
 import { env } from '@config/env';
 
@@ -18,6 +19,12 @@ api.interceptors.request.use((req: any) => {
         ...req.headers,
         Authorization: `Bearer ${token}`,
       },
+      data: req.data
+        ? reject(
+            (value: any) => ['', null, undefined].includes(value),
+            req.data
+          )
+        : null,
     };
   }
 

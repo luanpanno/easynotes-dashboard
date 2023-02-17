@@ -2,13 +2,19 @@ import { useState } from 'react';
 
 import { useNotes } from '@contexts/NotesCollection';
 
+import { Note } from '@models/notes';
+
 import { NoteCard, NotesListContainer } from './styles';
 
 type NotesListProps = {
   collectionId: number;
+  setSelectedNote: React.Dispatch<React.SetStateAction<Note>>;
 };
 
-const NotesList: React.FC<NotesListProps> = ({ collectionId }) => {
+const NotesList: React.FC<NotesListProps> = ({
+  collectionId,
+  setSelectedNote,
+}) => {
   const { notes, createNote, deleteNote } = useNotes();
   const [isCreate, setIsCreate] = useState(false);
   const [name, setName] = useState('');
@@ -71,7 +77,7 @@ const NotesList: React.FC<NotesListProps> = ({ collectionId }) => {
           </button>
           <button
             type="button"
-            onClick={() => deleteNote(note.id)}
+            onClick={() => setSelectedNote(note)}
           >
             Editar
           </button>

@@ -24,7 +24,6 @@
     "prettier"
   ],
   "rules": {
-    "indent": ["error", 2],
     "semi": [2, "always"],
     "@typescript-eslint/semi": [2, "always"],
     "prettier/prettier": ["warn", { "endOfLine": "auto" }],

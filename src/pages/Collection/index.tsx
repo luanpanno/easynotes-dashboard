@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 
 import LoadingContainer from '@components/LoadingContainer';
 import NoteFormModal from '@components/modals/NoteFormModal';
-import Note from '@components/notes/Note';
+import NoteArea from '@components/notes/NoteArea';
 import NotesList from '@components/notes/NotesList';
 
 import { useCollections } from '@contexts/CollectionsContext';
 import { useLoading } from '@contexts/LoadingContext';
 import { useNotes } from '@contexts/NotesCollection';
+
+import { Note } from '@models/notes';
 
 import { getParamId } from '@utils/getParamId';
 
@@ -20,6 +22,7 @@ const Collection = () => {
   const { selectedCollection, getCollectionById } = useCollections();
   const { getNotes } = useNotes();
   const [openCreateNote, setOpenCreateNote] = useState(false);
+  const [selectedNote, setSelectedNote] = useState<Note>(null as any);
   const collectionId = getParamId(id);
   const collection =
     selectedCollection && collectionId
@@ -54,8 +57,11 @@ const Collection = () => {
             </button>
           </header>
           <div className="notes-container">
-            <NotesList collectionId={collectionId} />
-            <Note />
+            <NotesList
+              collectionId={collectionId}
+              setSelectedNote={setSelectedNote}
+            />
+            <NoteArea selectedNote={selectedNote} />
           </div>
         </div>
       </CollectionContainer>

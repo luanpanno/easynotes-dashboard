@@ -16,7 +16,7 @@ type Context = {
   getNotes: () => Promise<Note[]>;
   getNoteById: (id: number) => Promise<Note>;
   createNote: (values: CreateNote) => Promise<Note>;
-  editNote: (id: UpdateNote) => Promise<Note>;
+  editNote: (id: number, values: UpdateNote) => Promise<Note>;
   deleteNote: (id: number) => Promise<void>;
   setSelectedNote: React.Dispatch<React.SetStateAction<Note | undefined>>;
 };
@@ -69,9 +69,9 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
-  const editNote = async (values: UpdateNote) => {
+  const editNote = async (id: number, values: UpdateNote) => {
     try {
-      const { data } = await notesService.update(values);
+      const { data } = await notesService.update(id, values);
 
       setNotes((prevState) =>
         prevState.map((note) => (note.id === data.id ? data : note))

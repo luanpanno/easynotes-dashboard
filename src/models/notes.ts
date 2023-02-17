@@ -15,5 +15,6 @@ export type CreateNote = {
 };
 
 export type UpdateNote = {
-  name: string;
+  name?: string;
+  content?: string;
 };

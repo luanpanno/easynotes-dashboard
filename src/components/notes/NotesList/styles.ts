@@ -4,7 +4,6 @@ export const NotesListContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-  margin-top: 32px;
   height: 60vh;
   overflow: scroll;
 `;

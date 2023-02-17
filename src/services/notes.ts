@@ -15,8 +15,8 @@ class NotesService {
   create = (values: CreateNote): Promise<AxiosResponse<Note>> =>
     api.post<Note>(`${ENDPOINT}`, values);
 
-  update = (values: UpdateNote): Promise<AxiosResponse<Note>> =>
-    api.patch<Note>(`${ENDPOINT}`, values);
+  update = (id: number, values: UpdateNote): Promise<AxiosResponse<Note>> =>
+    api.patch<Note>(`${ENDPOINT}/${id}`, values);
 
   delete = (id: number): Promise<AxiosResponse<void>> =>
     api.delete(`${ENDPOINT}/${id}`);
