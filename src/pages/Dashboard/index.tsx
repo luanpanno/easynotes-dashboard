@@ -5,7 +5,7 @@ import CollectionFormModal from '@components/modals/CollectionFormModal';
 
 import { useCollections } from '@contexts/CollectionsContext';
 
-const Dashboard = () => {
+function Dashboard() {
   const { getCollections } = useCollections();
   const [openCreateCollection, setOpenCreateCollection] = useState(false);
 
@@ -40,6 +40,6 @@ const Dashboard = () => {
       />
     </div>
   );
-};
+}
 
 export default Dashboard;

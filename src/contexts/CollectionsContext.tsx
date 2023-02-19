@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 
 import { Collection, CreateCollection } from '@models/collections';
 
@@ -32,7 +32,7 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
   const [selectedCollection, setSelectedCollection] =
     useState<SelectedColletion>();
 
-  const getCollections = async () => {
+  const getCollections = useCallback(async () => {
     try {
       const { data } = await collectionsService.list();
 
@@ -44,7 +44,7 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
 
       return Promise.reject();
     }
-  };
+  }, []);
 
   const getCollectionById = async (id: number) => {
     try {
