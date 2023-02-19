@@ -7,7 +7,7 @@ import { Note, UpdateNote } from '@models/notes';
 import { NoteAreaContainer } from './styles';
 
 type NoteAreaProps = {
-  selectedNote: Note;
+  selectedNote?: Note;
 };
 
 const NoteArea: React.FC<NoteAreaProps> = ({ selectedNote }) => {
@@ -24,6 +24,8 @@ const NoteArea: React.FC<NoteAreaProps> = ({ selectedNote }) => {
   }, [selectedNote]);
 
   const handleChange = (params: UpdateNote) => {
+    if (!selectedNote) return;
+
     editNote(selectedNote.id, {
       collectionId: selectedNote.collectionId,
       ...formValues,

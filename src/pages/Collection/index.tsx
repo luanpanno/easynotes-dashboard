@@ -9,6 +9,7 @@ import { useCollections } from '@contexts/CollectionsContext';
 import { useLoading } from '@contexts/LoadingContext';
 import { useNotes } from '@contexts/NotesCollection';
 
+import { Collection as CollectionType } from '@models/collections';
 import { Note } from '@models/notes';
 
 import { getParamId } from '@utils/getParamId';
@@ -18,31 +19,28 @@ import { CollectionContainer } from './styles';
 const Collection = () => {
   const { id } = useParams<{ id: string }>();
   const { loading } = useLoading();
-  const { selectedCollection, getCollectionById } = useCollections();
+  const { getCollectionById } = useCollections();
   const { getNotes } = useNotes();
   const [selectedNote, setSelectedNote] = useState<Note>(null as any);
+  const [collection, setCollection] = useState<CollectionType>();
   const collectionId = getParamId(id);
-  const collection =
-    selectedCollection && collectionId
-      ? selectedCollection[collectionId]
-      : null;
 
   useEffect(() => {
     if (collection || !collectionId) return;
 
-    getCollectionById(collectionId);
+    getCollectionById(collectionId).then((data) => setCollection(data));
   }, [collection, collectionId, getCollectionById]);
 
   useEffect(() => {
-    if (!selectedCollection) return;
+    if (!collection) return;
 
     getNotes();
-  }, [getNotes, selectedCollection]);
+  }, [getNotes, collection]);
 
   if (!collectionId) return null;
 
   return (
-    <LoadingContainer loading={loading && !selectedCollection}>
+    <LoadingContainer loading={loading && !collection}>
       <CollectionContainer>
         <div>
           <header className="page-title">

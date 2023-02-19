@@ -12,13 +12,11 @@ type Props = {
 
 type Context = {
   notes: Note[];
-  selectedNote: Note | undefined;
   getNotes: () => Promise<Note[]>;
   getNoteById: (id: number) => Promise<Note>;
   createNote: (values: CreateNote) => Promise<Note>;
   editNote: (id: number, values: UpdateNote) => Promise<Note>;
   deleteNote: (id: number) => Promise<void>;
-  setSelectedNote: React.Dispatch<React.SetStateAction<Note | undefined>>;
   notesByCollection: NotesByCollection;
 };
 
@@ -29,7 +27,6 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
   const [notesByCollection, setNotesByCollection] = useState<NotesByCollection>(
     {}
   );
-  const [selectedNote, setSelectedNote] = useState<Note>();
 
   const getNotes = useCallback(async () => {
     try {
@@ -59,8 +56,6 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
   const getNoteById = useCallback(async (id: number) => {
     try {
       const { data } = await notesService.getById(id);
-
-      setSelectedNote(data);
 
       return data;
     } catch (error: any) {
@@ -150,8 +145,6 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
         getNotes,
         getNoteById,
         createNote,
-        selectedNote,
-        setSelectedNote,
         editNote,
         deleteNote,
         notesByCollection,
