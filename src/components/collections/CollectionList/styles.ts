@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const CollectionListContainer = styled.div`
   display: flex;
   column-gap: 32px;
-  margin-top: 32px;
 `;
 
 export const CollectionCard = styled.div`

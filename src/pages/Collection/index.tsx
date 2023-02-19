@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import NoteArea from '@components/collections/NoteArea';
+import NotesList from '@components/collections/NotesList';
 import LoadingContainer from '@components/LoadingContainer';
-import NoteArea from '@components/notes/NoteArea';
-import NotesList from '@components/notes/NotesList';
 
 import { useCollections } from '@contexts/CollectionsContext';
 import { useLoading } from '@contexts/LoadingContext';

@@ -6,7 +6,7 @@ export const ModalContainer = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@ export const ModalContainer = styled.div`
 export const ModalContent = styled.div`
   background-color: #fff;
   border-radius: 16px;
-  width: 350px;
+  width: 600px;
 
   & > header {
     display: flex;
@@ -41,7 +41,7 @@ export const ModalContent = styled.div`
   }
 
   & > main {
-    padding: 16px 24px;
+    padding: 16px 24px 32px;
 
     input {
       width: 100%;

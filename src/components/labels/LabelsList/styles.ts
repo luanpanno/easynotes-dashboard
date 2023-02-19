@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const NotesListContainer = styled.div`
+export const LabelsListContainer = styled.div`
   display: flex;
   column-gap: 32px;
+  color: black;
 `;
 
-export const NotesCard = styled.div`
+export const LabelsCard = styled.div`
   a {
     border-radius: 8px;
     background-color: #fff;
