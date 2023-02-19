@@ -15,7 +15,7 @@ const NotesList: React.FC<NotesListProps> = ({
   collectionId,
   setSelectedNote,
 }) => {
-  const { notes, createNote, deleteNote } = useNotes();
+  const { createNote, deleteNote, notesByCollection } = useNotes();
   const [isCreate, setIsCreate] = useState(false);
   const [name, setName] = useState('');
 
@@ -66,7 +66,7 @@ const NotesList: React.FC<NotesListProps> = ({
           </button>
         </NoteCard>
       )}
-      {notes.map((note) => (
+      {notesByCollection[collectionId]?.map((note) => (
         <NoteCard key={note.id}>
           <span>{note.name}</span>
           <button
@@ -83,7 +83,9 @@ const NotesList: React.FC<NotesListProps> = ({
           </button>
         </NoteCard>
       ))}
-      {notes.length === 0 && <NoteCard>Nenhuma nota</NoteCard>}
+      {notesByCollection[collectionId]?.length === 0 && (
+        <NoteCard>Nenhuma nota</NoteCard>
+      )}
     </NotesListContainer>
   );
 };

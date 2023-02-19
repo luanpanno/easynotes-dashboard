@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
-import { CreateNote, Note, UpdateNote } from '@models/notes';
+import { CreateNote, Note, NotesByCollection, UpdateNote } from '@models/notes';
 
 import { notesService } from '@services/notes';
 
@@ -19,19 +19,34 @@ type Context = {
   editNote: (id: number, values: UpdateNote) => Promise<Note>;
   deleteNote: (id: number) => Promise<void>;
   setSelectedNote: React.Dispatch<React.SetStateAction<Note | undefined>>;
+  notesByCollection: NotesByCollection;
 };
 
 export const NotesContext = createContext<Context>(null as any);
 
 export const NotesProvider: React.FC<Props> = ({ children }) => {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [notesByCollection, setNotesByCollection] = useState<NotesByCollection>(
+    {}
+  );
   const [selectedNote, setSelectedNote] = useState<Note>();
 
   const getNotes = useCallback(async () => {
     try {
       const { data } = await notesService.list();
+      const byCollection = Object.assign(
+        {},
+        ...data
+          .map((note) => note.collectionId)
+          .map((collectionId) => ({
+            [collectionId ?? 0]: data.filter(
+              (note) => note.collectionId === collectionId
+            ),
+          }))
+      );
 
       setNotes(data);
+      setNotesByCollection(byCollection);
 
       return data;
     } catch (error: any) {
@@ -61,6 +76,16 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
 
       setNotes((prevState) => [...prevState, data]);
 
+      if (values.collectionId) {
+        setNotesByCollection((prevState) => ({
+          ...prevState,
+          [values.collectionId ?? 0]: [
+            ...prevState[values.collectionId ?? 0],
+            data,
+          ],
+        }));
+      }
+
       return data;
     } catch (error: any) {
       notificationError(error.message);
@@ -77,6 +102,15 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
         prevState.map((note) => (note.id === data.id ? data : note))
       );
 
+      if (values.collectionId) {
+        setNotesByCollection((prevState) => ({
+          ...prevState,
+          [values.collectionId ?? 0]: prevState[values.collectionId ?? 0].map(
+            (note) => (note.id === data.id ? data : note)
+          ),
+        }));
+      }
+
       return data;
     } catch (error: any) {
       notificationError(error.message);
@@ -87,9 +121,19 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
 
   const deleteNote = async (id: number) => {
     try {
+      const note = notes.find((note) => note.id === id);
       await notesService.delete(id);
 
       setNotes((prevState) => prevState.filter((note) => note.id !== id));
+
+      if (note?.collectionId) {
+        setNotesByCollection((prevState) => ({
+          ...prevState,
+          [note.collectionId ?? 0]: prevState[note.collectionId ?? 0].filter(
+            (note) => note.id !== id
+          ),
+        }));
+      }
 
       return Promise.resolve();
     } catch (error: any) {
@@ -110,6 +154,7 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
         setSelectedNote,
         editNote,
         deleteNote,
+        notesByCollection,
       }}
     >
       {children}

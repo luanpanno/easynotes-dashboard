@@ -17,4 +17,9 @@ export type CreateNote = {
 export type UpdateNote = {
   name?: string;
   content?: string;
+  collectionId?: number;
+};
+
+export type NotesByCollection = {
+  [collectionId: number]: Note[];
 };

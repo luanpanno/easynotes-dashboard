@@ -24,7 +24,11 @@ const NoteArea: React.FC<NoteAreaProps> = ({ selectedNote }) => {
   }, [selectedNote]);
 
   const handleChange = (params: UpdateNote) => {
-    editNote(selectedNote.id, { ...formValues, ...params });
+    editNote(selectedNote.id, {
+      collectionId: selectedNote.collectionId,
+      ...formValues,
+      ...params,
+    });
     setFormValues((prevState) => ({ ...prevState, ...params }));
   };
 
