@@ -1,7 +1,7 @@
 import { Routes as Switch, Route, Navigate } from 'react-router-dom';
 
-import AuthLayout from '@components/AuthLayout';
-import Layout from '@components/Layout';
+import AuthLayout from '@components/layouts/AuthLayout';
+import Layout from '@components/layouts/Layout';
 
 import Collection from '@pages/Collection';
 import Dashboard from '@pages/Dashboard';
