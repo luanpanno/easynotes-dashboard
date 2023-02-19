@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 
 import { CreateNote, Note, UpdateNote } from '@models/notes';
 
@@ -27,7 +27,7 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [selectedNote, setSelectedNote] = useState<Note>();
 
-  const getNotes = async () => {
+  const getNotes = useCallback(async () => {
     try {
       const { data } = await notesService.list();
 
@@ -39,7 +39,7 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
 
       return Promise.reject();
     }
-  };
+  }, []);
 
   const getNoteById = async (id: number) => {
     try {
