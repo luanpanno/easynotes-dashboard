@@ -6,6 +6,7 @@ import Layout from '@components/Layout';
 import Collection from '@pages/Collection';
 import Dashboard from '@pages/Dashboard';
 import Login from '@pages/Login';
+import Notes from '@pages/Notes';
 import Signup from '@pages/Signup';
 
 import PublicRoute from '@routes/PublicRoute';
@@ -15,10 +16,7 @@ import PrivateRoute from '../PrivateRoute';
 const Routes = () => (
   <Switch>
     <Route element={<AuthLayout />}>
-      <Route
-        path="/login"
-        element={<PublicRoute />}
-      >
+      <Route element={<PublicRoute />}>
         <Route
           path="/login"
           element={<Login />}
@@ -26,22 +24,13 @@ const Routes = () => (
       </Route>
     </Route>
     <Route element={<AuthLayout />}>
-      <Route
-        path="/signup"
-        element={<PublicRoute />}
-      >
-        <Route
-          path="/signup"
-          element={<Signup />}
-        />
+      <Route element={<PublicRoute />}>
+        <Route element={<Signup />} />
       </Route>
     </Route>
 
     <Route element={<Layout />}>
-      <Route
-        path="/dashboard"
-        element={<PrivateRoute />}
-      >
+      <Route element={<PrivateRoute />}>
         <Route
           path="/dashboard"
           element={<Dashboard />}
@@ -50,13 +39,19 @@ const Routes = () => (
     </Route>
 
     <Route element={<Layout />}>
-      <Route
-        path="/dashboard/:id"
-        element={<PrivateRoute />}
-      >
+      <Route element={<PrivateRoute />}>
         <Route
-          path="/dashboard/:id"
+          path="/dashboard/collections/:id"
           element={<Collection />}
+        />
+      </Route>
+    </Route>
+
+    <Route element={<Layout />}>
+      <Route element={<PrivateRoute />}>
+        <Route
+          path="/dashboard/notes/:id"
+          element={<Notes />}
         />
       </Route>
     </Route>

@@ -16,7 +16,9 @@ const NotesList = () => {
     <NotesListContainer>
       {notes.map((collection) => (
         <NotesCard key={collection.id}>
-          <Link to={`/dashboard/${collection.id}`}>{collection.name}</Link>
+          <Link to={`/dashboard/notes/${collection.id}`}>
+            {collection.name}
+          </Link>
         </NotesCard>
       ))}
       {notes.length === 0 && <span>Nenhuma nota</span>}

@@ -11,7 +11,9 @@ const CollectionList = () => {
     <CollectionListContainer>
       {collections.map((collection) => (
         <CollectionCard key={collection.id}>
-          <Link to={`/dashboard/${collection.id}`}>{collection.name}</Link>
+          <Link to={`/dashboard/collections/${collection.id}`}>
+            {collection.name}
+          </Link>
         </CollectionCard>
       ))}
       {collections.length === 0 && <span>Nenhuma coleção</span>}

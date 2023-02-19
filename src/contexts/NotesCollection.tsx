@@ -56,7 +56,7 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
     }
   }, []);
 
-  const getNoteById = async (id: number) => {
+  const getNoteById = useCallback(async (id: number) => {
     try {
       const { data } = await notesService.getById(id);
 
@@ -68,7 +68,7 @@ export const NotesProvider: React.FC<Props> = ({ children }) => {
 
       return Promise.reject();
     }
-  };
+  }, []);
 
   const createNote = async (values: CreateNote) => {
     try {

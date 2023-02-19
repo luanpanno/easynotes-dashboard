@@ -6,17 +6,15 @@ import LabelsListModal from '@components/modals/LabelsListModal';
 import NotesList from '@components/notes/NotesList';
 
 import { useCollections } from '@contexts/CollectionsContext';
+import { useDashboard } from '@contexts/DashboardContext';
 
 import Sidebar from './Sidebar';
 import { DashboardContainer } from './styles';
 
-export type View = 'collections' | 'notes' | 'labels';
-
 function Dashboard() {
+  const { view, showLabels, closeShowLabelsModal } = useDashboard();
   const { getCollections } = useCollections();
   const [openCreateCollection, setOpenCreateCollection] = useState(false);
-  const [view, setView] = useState<View>('collections');
-  const [showLabels, setShowLabels] = useState(false);
 
   useEffect(() => {
     getCollections();
@@ -27,12 +25,9 @@ function Dashboard() {
   };
 
   const closeModal = () => {
-    setShowLabels(false);
+    closeShowLabelsModal();
     setOpenCreateCollection(false);
   };
-
-  const handleView = (view: View) =>
-    view === 'labels' ? setShowLabels(true) : setView(view);
 
   return (
     <DashboardContainer>
@@ -46,7 +41,7 @@ function Dashboard() {
         </button>
       </header>
       <div className="main">
-        <Sidebar handleView={handleView} />
+        <Sidebar />
         {view === 'collections' && <CollectionList />}
         {view === 'notes' && <NotesList />}
       </div>

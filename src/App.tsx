@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { AuthProvider } from '@contexts/AuthContext';
 import { CollectionsProvider } from '@contexts/CollectionsContext';
+import { DashboardProvider } from '@contexts/DashboardContext';
 import { LoadingProvider } from '@contexts/LoadingContext';
 import { NotesProvider } from '@contexts/NotesCollection';
 
@@ -19,7 +20,9 @@ function App() {
         <AuthProvider>
           <CollectionsProvider>
             <NotesProvider>
-              <Routes />
+              <DashboardProvider>
+                <Routes />
+              </DashboardProvider>
             </NotesProvider>
           </CollectionsProvider>
         </AuthProvider>

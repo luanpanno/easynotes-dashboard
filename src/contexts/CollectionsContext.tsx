@@ -46,7 +46,7 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
     }
   }, []);
 
-  const getCollectionById = async (id: number) => {
+  const getCollectionById = useCallback(async (id: number) => {
     try {
       const { data } = await collectionsService.getById(id);
 
@@ -58,7 +58,7 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
 
       return Promise.reject();
     }
-  };
+  }, []);
 
   const createCollection = async (values: CreateCollection) => {
     try {
