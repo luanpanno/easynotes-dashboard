@@ -10,7 +10,7 @@ import { LabelsListContainer } from './styles';
 export type LabelsListProps = ModalProps;
 
 const LabelsList: React.FC<LabelsListProps> = () => {
-  const { labels, getLabels } = useLabels();
+  const { labels, getLabels, deleteLabel } = useLabels();
 
   useEffect(() => {
     getLabels();
@@ -20,7 +20,15 @@ const LabelsList: React.FC<LabelsListProps> = () => {
     <LabelsListContainer>
       <LabelForm />
       {labels.map((label) => (
-        <span key={label.id}>{label.name}</span>
+        <div key={label.id}>
+          <button
+            type="button"
+            onClick={() => deleteLabel(label.id)}
+          >
+            Deletar
+          </button>
+          <span>{label.name}</span>
+        </div>
       ))}
       {labels.length === 0 && <span>Nenhum marcador</span>}
     </LabelsListContainer>

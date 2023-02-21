@@ -4,7 +4,7 @@ import { CreateLabel, Label } from '@models/labels';
 
 import { labelsService } from '@services/labels';
 
-import { notificationError, notificationSuccess } from '@utils/notifications';
+import { notificationError } from '@utils/notifications';
 
 type Props = {
   children?: React.ReactNode;
@@ -14,6 +14,7 @@ type Context = {
   labels: Label[];
   getLabels: () => Promise<Label[]>;
   createLabel: (values: CreateLabel) => Promise<Label>;
+  deleteLabel: (id: number) => Promise<void>;
 };
 
 export const LabelsContext = createContext<Context>(null as any);
@@ -41,9 +42,21 @@ export const LabelsProvider: React.FC<Props> = ({ children }) => {
 
       setLabels((prevState) => [...prevState, data]);
 
-      notificationSuccess('Marcador criado com sucesso');
-
       return data;
+    } catch (error: any) {
+      notificationError(error.message);
+
+      return Promise.reject();
+    }
+  };
+
+  const deleteLabel = async (id: number) => {
+    try {
+      await labelsService.delete(id);
+
+      setLabels((prevState) => prevState.filter((label) => label.id !== id));
+
+      return Promise.resolve();
     } catch (error: any) {
       notificationError(error.message);
 
@@ -57,6 +70,7 @@ export const LabelsProvider: React.FC<Props> = ({ children }) => {
         labels,
         getLabels,
         createLabel,
+        deleteLabel,
       }}
     >
       {children}
