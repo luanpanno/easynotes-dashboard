@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { AuthProvider } from '@contexts/AuthContext';
 import { CollectionsProvider } from '@contexts/CollectionsContext';
 import { DashboardProvider } from '@contexts/DashboardContext';
+import { LabelsProvider } from '@contexts/LabelsContext';
 import { LoadingProvider } from '@contexts/LoadingContext';
 import { NotesProvider } from '@contexts/NotesCollection';
 
@@ -20,9 +21,11 @@ function App() {
         <AuthProvider>
           <CollectionsProvider>
             <NotesProvider>
-              <DashboardProvider>
-                <Routes />
-              </DashboardProvider>
+              <LabelsProvider>
+                <DashboardProvider>
+                  <Routes />
+                </DashboardProvider>
+              </LabelsProvider>
             </NotesProvider>
           </CollectionsProvider>
         </AuthProvider>
