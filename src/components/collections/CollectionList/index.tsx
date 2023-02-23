@@ -5,7 +5,7 @@ import { useCollections } from '@contexts/CollectionsContext';
 import { CollectionCard, CollectionListContainer } from './styles';
 
 const CollectionList = () => {
-  const { collections } = useCollections();
+  const { collections, deleteCollection } = useCollections();
 
   return (
     <CollectionListContainer>
@@ -14,6 +14,12 @@ const CollectionList = () => {
           <Link to={`/dashboard/collections/${collection.id}`}>
             {collection.name}
           </Link>
+          <button
+            type="button"
+            onClick={() => deleteCollection(collection.id)}
+          >
+            Deletar
+          </button>
         </CollectionCard>
       ))}
       {collections.length === 0 && <span>Nenhuma coleção</span>}

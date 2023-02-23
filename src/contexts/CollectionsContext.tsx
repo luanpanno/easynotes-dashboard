@@ -15,6 +15,7 @@ type Context = {
   getCollections: () => Promise<Collection[]>;
   getCollectionById: (id: number) => Promise<Collection>;
   createCollection: (values: CreateCollection) => Promise<Collection>;
+  deleteCollection: (id: number) => Promise<void>;
 };
 
 export const CollectionsContext = createContext<Context>(null as any);
@@ -64,6 +65,22 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
+  const deleteCollection = async (id: number) => {
+    try {
+      await collectionsService.delete(id);
+
+      setCollections((prevState) =>
+        prevState.filter((collection) => collection.id !== id)
+      );
+
+      return Promise.resolve();
+    } catch (error: any) {
+      notificationError(error.message);
+
+      return Promise.reject();
+    }
+  };
+
   return (
     <CollectionsContext.Provider
       value={{
@@ -71,6 +88,7 @@ export const CollectionsProvider: React.FC<Props> = ({ children }) => {
         getCollections,
         getCollectionById,
         createCollection,
+        deleteCollection,
       }}
     >
       {children}
